@@ -1,0 +1,22 @@
+{
+	"name": "Node.js Configuration",
+	"version": "1.0.0",
+	"description": "Should Serve as Basic configuration For Node(MySQL,Sequlize,Mongo)",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Himanshu Khantwal",
+	"license": "",
+	"dependencies": {
+		"babel-register": "^6.24.1",
+		"body-parser": "^1.17.2",
+		"express": "^4.15.3",
+		"mongoose": "^4.11.0",
+		"mysql": "^2.13.0",
+		"sequelize": "^3.30.2"  
+	},
+	"devDependencies": {
+		"sequelize-auto": "^0.4.28"
+	}
+}
