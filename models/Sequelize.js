@@ -27,14 +27,14 @@ const defineModelRelation = models => {
     Object.keys(models).forEach( modelName => {
         const currentModel = models[modelName];
         const modelAttributes = currentModel.attributes;
-        for(var key in modelAttributes){
+        for(const key in modelAttributes){
             const currentAttrObj = modelAttributes[key];
             if(currentAttrObj.hasOwnProperty("references")){
                const foreignModelName = generateSequelizeModelName(currentAttrObj.references.model)
                
                currentModel.belongsTo(models[foreignModelName], {foreignKey: key, targetKey: currentAttrObj.references.key});
                
-               //models[foreignModelName].belongsTo(currentModel, {foreignKey: key, targetKey: currentAttrObj.references.key}); 
+               models[foreignModelName].hasMany(currentModel, { foreignKey : key});
             }
         }
     })
@@ -47,6 +47,17 @@ module.exports = sequelizeModels;
 sequelizeModels.customerInfoModel.findAll({
     include: [{
         model: sequelizeModels.orderMasterModel
+    }],
+    raw: true
+}).then(function(data){
+    console.log(data)
+}).catch(function(err){
+    console.log(err)
+})
+
+sequelizeModels.orderMasterModel.findAll({
+    include: [{
+        model: sequelizeModels.customerInfoModel
     }],
     raw: true
 }).then(function(data){

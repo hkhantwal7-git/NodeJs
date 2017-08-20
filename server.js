@@ -3,7 +3,6 @@
     --- Set up sequelize
     --- set up mongoose
     --- set up authentication using passportJS/own module
-
 */
 
 "use strict";
@@ -16,7 +15,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/test' , (req, res) => {
+app.get('/helloWorld' , (req, res) => {
    res.send('Hello World');
 })
 
