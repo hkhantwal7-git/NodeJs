@@ -1,5 +1,5 @@
 {
-	"name": "Node.js Configuration",
+	"name": "nodejs",
 	"version": "1.0.0",
 	"description": "Should Serve as Basic configuration For Node(MySQL,Sequlize,Mongo)",
 	"main": "server.js",
@@ -9,7 +9,6 @@
 	"author": "Himanshu Khantwal",
 	"license": "",
 	"dependencies": {
-		"babel-register": "^6.24.1",
 		"body-parser": "^1.17.2",
 		"express": "^4.15.3",
 		"mongoose": "^4.11.0",

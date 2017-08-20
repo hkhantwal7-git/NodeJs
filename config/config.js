@@ -1,11 +1,23 @@
+const databaseHost = 'localhost',
+    databaseUser = 'root',
+    databasePassword = 'password',
+    databaseName = 'testDatabase';
+
 module.exports = {
     serverPort : 3000,
-    databaseOptions : {
+    mysqlOptions : {
         connectionLimit : 10,
-        host     : 'localhost',
-        user     : 'root',
-        password : 'password',
-        database : 'nodejs',
-        connectTimeout : 5000
+        host            : databaseHost,
+        user            : databaseUser,
+        password        : databasePassword,
+        database        : databaseName,
+        connectTimeout  : 5000
+    },
+    sequelizeOption : {
+        host     : databaseHost,
+        username : databaseUser,
+        password : databasePassword,
+        database :databaseName,
+        dialect  : 'mysql'
     }
 }

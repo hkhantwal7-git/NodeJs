@@ -1,6 +1,6 @@
 var config = require("../config/config")
 var SequelizeAuto = require('sequelize-auto')
-var databaseOptions = config.databaseOptions;
+var databaseOptions = config.mysqlOptions;
 
 var auto = new SequelizeAuto( 
     databaseOptions.database, databaseOptions.user, databaseOptions.password, {
@@ -11,7 +11,7 @@ var auto = new SequelizeAuto(
             createdAt : 'CREATION_TSTAMP',
             updatedAt : 'LAST_MODIFIED_TSTAMP'
         },
-        directory:'./sequelizeModels'
+        directory: './sequelizeModels'
     }
 )
 auto.run(function (err) {

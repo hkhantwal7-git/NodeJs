@@ -1,18 +1,27 @@
-require('babel-register'); 
-var app = (require('express'))();
-var config = require("./config/config");
-var Connection = require("./models/Connection");
+/* 
+    Things Need to implement in this
+    --- Set up sequelize
+    --- set up mongoose
+    --- set up authentication using passportJS/own module
+
+*/
+
+"use strict";
+const app = (require('express'))();
+const config = require("./config/config");
+const ConnectionModel = require("./models/Connection");
 
 //for adding post data in req.body
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/test' , (req, res) => {
    res.send('Hello World');
 })
+
 app.get("/mysqlTest.ns",(req,res) => {
-    Connection.query("SELECT 1")
+    ConnectionModel.query("SELECT 1")
     .then(function(rows){
         res.send({
            isSuccess : true,
