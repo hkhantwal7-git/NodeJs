@@ -1,7 +1,7 @@
 "use strict";
 const app = (require('express'))();
 const config = require("./config/config");
-const ConnectionModel = require("./models/Connection");
+const ConnectionModel = require("./models/Database/Connection");
 
 process.env.NODE_ENV = config.environment || 'production';
 //for adding post data in req.body
