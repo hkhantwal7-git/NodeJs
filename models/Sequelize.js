@@ -4,7 +4,7 @@ const config = require("../config/config");
 const sequelize = new Sequelize(config.sequelizeOption);
 
 //override the query method to support debugging
-const originalQuery = sequelize.query
+const originalQuery = sequelize.query;
 Sequelize.prototype.query =  function(){
     return originalQuery.apply(this, arguments)
     .catch( err => {
@@ -20,7 +20,7 @@ const sequelizeModels = {};
 require("fs").readdirSync(normalizedPath).forEach(file  => {
     const modelName = generateSequelizeModelName(file.replace(".js",""));
     sequelizeModels[modelName] = ( require("./sequelizeModels/" + file) )(sequelize,Sequelize.DataTypes);
-    sequelizeModels[modelName].modelName = modelName
+    sequelizeModels[modelName].modelName = modelName;
 });
 
 const defineModelRelation = models => {
@@ -30,18 +30,18 @@ const defineModelRelation = models => {
         for(const key in modelAttributes){
             const currentAttrObj = modelAttributes[key];
             if(currentAttrObj.hasOwnProperty("references")){
-               const foreignModelName = generateSequelizeModelName(currentAttrObj.references.model)
+               const foreignModelName = generateSequelizeModelName(currentAttrObj.references.model);
                
                currentModel.belongsTo(models[foreignModelName], {foreignKey: key, targetKey: currentAttrObj.references.key});
                
                models[foreignModelName].hasMany(currentModel, { foreignKey : key});
             }
         }
-    })
+    });
 };
 defineModelRelation(sequelizeModels);
 
-sequelizeModels.sequelize = sequelize
+sequelizeModels.sequelize = sequelize;
 module.exports = sequelizeModels;
 
 sequelizeModels.customerInfoModel.findAll({
@@ -50,10 +50,10 @@ sequelizeModels.customerInfoModel.findAll({
     }],
     raw: true
 }).then(function(data){
-    console.log(data)
+    console.log(data);
 }).catch(function(err){
-    console.log(err)
-})
+    console.log(err);
+});
 
 sequelizeModels.orderMasterModel.findAll({
     include: [{
@@ -61,7 +61,7 @@ sequelizeModels.orderMasterModel.findAll({
     }],
     raw: true
 }).then(function(data){
-    console.log(data)
+    console.log(data);
 }).catch(function(err){
-    console.log(err)
-})
+    console.log(err);
+});

@@ -19,5 +19,7 @@ module.exports = {
         password : databasePassword,
         database :databaseName,
         dialect  : 'mysql'
-    }
-}
+    },
+    environment : 'development',
+    branch: 'local'
+};

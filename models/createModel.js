@@ -1,5 +1,5 @@
-var config = require("../config/config")
-var SequelizeAuto = require('sequelize-auto')
+var config = require("../config/config");
+var SequelizeAuto = require('sequelize-auto');
 var databaseOptions = config.mysqlOptions;
 
 var auto = new SequelizeAuto( 
@@ -13,10 +13,9 @@ var auto = new SequelizeAuto(
         },
         directory: './sequelizeModels'
     }
-)
+);
 auto.run(function (err) {
     if (err) throw err;
-  
     console.log(auto.tables); // table list
     console.log(auto.foreignKeys); // foreign key list
-  });
+});
