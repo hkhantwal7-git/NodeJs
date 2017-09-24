@@ -1,6 +1,6 @@
 const mysql  = require('mysql');
 const config = require("../config/config");
-const config1 = require("./Sequelize");
+//const config1 = require("./Sequelize");
 const pool = mysql.createPool(config.mysqlOptions);    
 
 module.exports = {
