@@ -15,7 +15,7 @@ const sessionObj = {
     secret: 'jndjbcfhbvrbeh382u823u',
     resave : false,
     saveUninitialized : true,
-    store:new MySQLStore(Object.assign({},config.mysqlOptions,{
+    store:new MySQLStore({...config.mysqlOptions,
         schema: {
             tableName: 'USER_SESSION_DATA',
             columnNames: {
@@ -24,7 +24,7 @@ const sessionObj = {
                 data: 'SESSION_JSON_DATA'
             }
         }
-    })),
+    }),
     unset : 'destroy',
     cookie: {
         expires : 12,
