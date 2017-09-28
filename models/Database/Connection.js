@@ -14,12 +14,15 @@ module.exports = {
             };
             pool.getConnection( (err,connection) => {
                 if (err) {
-                    console.log("-----Error getting Connection",query,err);
+                    console.log("(Error getting Connection) for query ",query,err);
                     return sendResponse(err,[]);
-                }   
+                }
+                console.log("(Executing Query) : " + query);
                 connection.query(query, (err,rows) => {
                     connection.release();
-                    console.log("-----",query,err);
+                    if(err){
+                        console.log("Executing Query",query,err);
+                    }
                     sendResponse(err,rows);       
                 });
                 connection.on('error', err => {

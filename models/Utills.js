@@ -38,5 +38,32 @@ module.exports = {
             }
             return index == 0 ? match.toLowerCase() : match.toUpperCase();
         });
+    },
+    taskRunner(taskDef){
+        const iterator = taskDef();
+        let result;
+        
+        const iterate = (data) => {
+            result = iterator.next(data);
+            const done = result.done;
+            const value = result.value;
+            if(!done){
+                
+                if(typeof value === 'function'){
+                    value((err,data) => {
+                        if(err){
+                            result = iterator.throw(err);
+                            return;
+                        }
+                        iterate(data);
+                    });
+                }else if(typeof value === "object" && "then" in value){
+                    value.then(iterate).catch( err => result = iterator.throw(err) );
+                }else{
+                    iterate(value);
+                }
+            }
+        };
+        iterate();
     }
 };
