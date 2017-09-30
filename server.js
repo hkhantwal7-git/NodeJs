@@ -5,7 +5,6 @@ const ConnectionModel = require("./models/Database/Connection");
 
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-const UtilityModel = require("./models/utills");
 const AuthorizationModel = require("./models/Authorization/authorization");
 
 process.env.NODE_ENV = config.environment || 'production';
@@ -38,6 +37,7 @@ const sessionObj = {
 } */
 app.use(session(sessionObj));
 
+app.use(AuthorizationModel.validateSession);
 //for adding post data in req.body
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -50,21 +50,19 @@ app.use(function(req,res,next){
 
 app.get('/helloWorld' , (req, res) => res.send('Hello World') );
 
-app.get("/mysqlTest", (req,res) => {
-    UtilityModel.taskRunner(function *(){
-        try{
-            let rows = yield ConnectionModel.query("SELECT 1");
-            res.send({
-                isSuccess : true,
-                rows : rows[0]
-            });
-        }catch(error){
-            res.send({
-                error,
-                isSuccess : false
-            }); 
-        }
-    });
+app.get("/mysqlTest", async (req,res) => {
+    try{
+        let rows = await ConnectionModel.query("SELECT 1");
+        res.send({
+            isSuccess : true,
+            rows : rows[0]
+        });
+    }catch(error){
+        res.send({
+            isSuccess : false,
+            error
+        });
+    }
 });
 
 app.listen( config.serverPort, () => console.log("Server listening at port", config.serverPort) );
